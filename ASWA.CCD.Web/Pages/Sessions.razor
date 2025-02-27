@@ -49,7 +49,7 @@ else
         message = null;
         try
         {
-            sessions = await http.GetFromJsonAsync<SessionModel[]>("api/sessions");
+            sessions = await http.GetFromJsonAsync<SessionModel[]>("/api/sessions");
         }
         catch
         {
