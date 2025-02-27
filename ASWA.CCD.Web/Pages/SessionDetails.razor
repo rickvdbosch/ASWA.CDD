@@ -1,0 +1,49 @@
+﻿@page "/sessiondetails/{day}/{id}"
+
+@inject HttpClient http
+
+<h3>Session Details</h3>
+@if (session == null)
+{
+    if (message != null)
+    {
+        <h2>@message</h2>
+    }
+    else
+    {
+        <p><em>Loading...</em></p>
+    }
+}
+else
+{
+    <h1>
+        @session.Title <small>by</small>
+    </h1>
+    <div>
+        @((MarkupString)session.Speaker)
+    </div>
+    <div>
+        @session.Description
+    </div>
+}
+
+@code {
+    [Parameter] public string? day { get; set; }
+    [Parameter] public string? id { get; set; }
+
+    private SessionModel? session;
+    private string? message;
+
+    protected override async Task OnInitializedAsync()
+    {
+        message = null;
+        try
+        {
+            session = await http.GetFromJsonAsync<SessionModel>($"api/sessions/{day}/{id}");
+        }
+        catch
+        {
+            message = "Something went wrong trying to get this session. Please try again.";
+        }
+    }
+}
