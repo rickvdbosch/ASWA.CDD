@@ -6,7 +6,7 @@
       "allowedRoles": [ "anonymous" ]
     },
     {
-      "route": ":/sessiondetails/*",
+      "route": "/sessiondetails/*",
       "allowedRoles": [ "authenticated" ]
     }
   ],
